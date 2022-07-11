@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  # docker-compose -f tools/docker-compose.yaml run --rm update-goldens
+  update-goldens:
+    image:  cirrusci/flutter:3.0.4
+    volumes:
+      - ../:/work
+      - /work/.dart_tool
+      - /work/build
+    working_dir: /work
+    entrypoint: /bin/sh -cex "flutter pub get && flutter test --update-goldens --tags golden;"
